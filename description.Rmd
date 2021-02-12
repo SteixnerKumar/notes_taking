@@ -1,0 +1,66 @@
+---
+title: "Notes Taking"
+description: |
+  Notes taking, the cool way
+author: |
+  | [Saurabh Steixner-Kumar](https://steixnerkumar.github.io/)
+  | \footnotesize (social): [\large\faLinkedinSquare](https://www.linkedin.com/in/SteixnerKumar/) -  [\large\faGithub](https://github.com/SteixnerKumar) -    [\large\faTwitter](https://twitter.com/SteixnerKumar)
+fontsize: 12pt
+output:
+  rmdformats::readthedown:
+    self_contained: true
+    toc_depth: 2
+    thumbnails: true
+    lightbox: true
+    gallery: true
+    fig_caption: true
+    fig_height: 7
+    fig_width: 12
+    # highlight: tango
+    highlight: kate
+  pdf_document:
+    latex_engine: xelatex
+    pandoc_args: --listings
+    fig_caption: yes
+    fig_height: 7
+    fig_width: 12
+    keep_tex: no
+    number_sections: yes
+    toc: yes
+    includes:
+      in_header: preamble.tex
+  html_notebook:
+    fig_caption: yes
+    fig_height: 7
+    fig_width: 12
+    number_sections: yes
+    toc: yes
+editor_options:
+  chunk_output_type: inline
+# runtime: shiny
+header-includes:
+  - \usepackage{titling}
+  - '\defaultfontfeatures{Extension = .otf}'
+  - '\usepackage{fontawesome}'
+  - '\usepackage{pdfpages}'
+  - \preauthor{\begin{flushright}}
+  - \postauthor{\end{flushright}}
+---
+
+
+
+
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
