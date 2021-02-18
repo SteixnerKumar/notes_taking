@@ -1615,7 +1615,35 @@ src: url(data:application/font-sfnt;base64,AAEAAAARAQAABAAQR0RFRgs+Cz8AAjwQAAAAQ
    <div id="sidebar">
     <h2><a href="#content">Notes Taking</a></h2>
     <div id="toc">
-      
+      <ul>
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#solution">Solution</a></li>
+      <li><a href="#execution">Execution</a>
+      <ul>
+      <li><a href="#pre-requisites">Pre-requisites</a></li>
+      <li><a href="#steps">Steps</a>
+      <ul>
+      <li><a href="#step-1---always-work-with-an-up-to-date-system">Step 1 - Always work with an up to date system</a></li>
+      <li><a href="#step-2---install-the-required-software-and-packages">Step 2 - Install the required software and packages</a>
+      <ul>
+      <li><a href="#vim">Vim</a></li>
+      <li><a href="#pandoc">Pandoc</a></li>
+      <li><a href="#latex">Latex</a></li>
+      <li><a href="#git">Git</a></li>
+      <li><a href="#zathura">Zathura</a></li>
+      </ul></li>
+      <li><a href="#step-3---creating-bash-scripts">Step 3 - Creating bash scripts</a>
+      <ul>
+      <li><a href="#script-1">Script 1</a></li>
+      <li><a href="#script-2">Script 2</a></li>
+      <li><a href="#script-3">Script 3</a></li>
+      <li><a href="#script-4">Script 4</a></li>
+      </ul></li>
+      <li><a href="#step-4---giving-bash-access">Step 4 - Giving bash access</a></li>
+      <li><a href="#step-4---final-hammer">Step 4 - Final Hammer</a></li>
+      </ul></li>
+      </ul></li>
+      </ul>
     </div>
     <div id="postamble" data-toggle="wy-nav-shift" class="status">
                   <p class="author"><span class="glyphicon glyphicon-user"></span> <div class="line-block"><a href="https://steixnerkumar.github.io/">Saurabh Steixner-Kumar</a><br />
@@ -1629,13 +1657,232 @@ src: url(data:application/font-sfnt;base64,AAEAAAARAQAABAAQR0RFRgs+Cz8AAjwQAAAAQ
    
 <!-- Don't indent these lines or it will mess pre blocks indentation --> 
 <div id="main">
-<p>This is an <a href="http://rmarkdown.rstudio.com">R Markdown</a> Notebook. When you execute code within the notebook, the results appear beneath the code.</p>
-<p>Try executing this chunk by clicking the <em>Run</em> button within the chunk or by placing your cursor inside it and pressing <em>Ctrl+Shift+Enter</em>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">plot</span>(cars)</span></code></pre></div>
-<p><img src="data:image/png;base64,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Auh0Ngf+wfHcbB3EgyedtiCAAIBYAXR+NA2e5wsPvJ0GUaebwQsgAGASK4BObuVOm0Sd7oUhgACAUAHU3vp9+Quv01s3iP8yAQQAhAqg86Pb33etemxhV1YYau8AgDgEEACQTqAAGj9tDpZnvfsKDADoLlAATV7cqp32sqD7XTYhgACAWAH06XBaQK8XHjib9s+tD4W+SAABALECqJ0HPy2e459Hrd/mKyF2mgUvgACASbAAmrw5XLqk+eCnbhsQQABAtACajF8uJtDB4653hBdAAEC4AJoavx+9PD4+fjx61bV+JgIIAGjFC6CtCCAAQAABAAkJIAAgHQEEAKQjgACAdAQQAJCOAAIA0gkUQOdHzSp3/uiycwIIABBAAEA+gQJocvZIAAEAPYgUQJPx0653f18mgACAYAE0K6An22xAAAEA0QKovQ6o01deywQQABAugCan230JJoAAgHgBNH661UdAAggAiBdAk0/Hx/+5+W8LIAAgYABtRwABAAIIAEhIAAEA6QggACAdAQQApCOAAIB0BBAAkI4AAgDSEUAAQDoCCABIRwABAOkIIAAgHQEEAKQjgACAdAQQAJCOAAIA0hFAAEA6AggASEcAAQDpCCAAIB0BBACkI4AAgHQEEACQjgACANIRQABAP5oL+96PNQggAKAXTROngAQQANCHq/CJUEACCADowUL2BDjdCiAAoAeL59jyz7cCCADogQAqWPkDAgAxCaCClT8gABDT9Bx7NQms/POtAAIAetDcsO+9+RoBBAD0oFmcBl/8+VYAAQA9MA2+YAFGBABC8glQwcofEACIyTVABSt/QAAgJrPAClb+gABATNYBKlj5AwIAMQmggpU/IAAQkwAqWPkDAgAxmQZfsAAjAgAxLU6D3++erEEAAQC9iDMJXgABAH2J0z8CCADIRwABAOkIIAAgHQEEAKQjgACAdAQQAJCOAAIA0hFAAEA6AggASEcAAQDpCCAAIB0BBACkI4AAgHQEEACQjgACANIRQABAOgIIAEhHAAEA6QggACAdAQQApCOAAIB0BBAAkI4AAgDSEUAAQDoCCABIRwABAOkIIAAgHQEEAKQjgACAdAQQAJCOAAIA0hFAAEA6AggASEcAAQDpCCAAIB0BBACkI4AAgHQEEACQjgACANIRQABAOgIIAEhHAAEAxWsu9Le9vrZ0tcW+N9gn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" width="1152" /></p>
-<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the toolbar or by pressing <em>Ctrl+Alt+I</em>.</p>
-<p>When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the <em>Preview</em> button or press <em>Ctrl+Shift+K</em> to preview the HTML file).</p>
-<p>The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike <em>Knit</em>, <em>Preview</em> does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.</p>
+<div id="problem" class="section level1">
+<h1>Problem</h1>
+<p>Have you come across a thought or an world changing idea while working on a project or guilty reading whilst procrastinating on work, and frustratingly broken the smooth flow to write it down. Or, even worse, let it slide by and later regret because your highly evolved fast functioning brain cannot be bothered to remember such details.</p>
+<p>Well, I have, and as today is your lucky day, I am giving you an insight into how to get around it. If you practice patience and diligence, don’t worry, this should be a fun read and a cool small project.</p>
+</div>
+<div id="solution" class="section level1">
+<h1>Solution</h1>
+<p>A solution for everyone or every scenario is probably stretching it a bit, but it certainly is for me and similarly inclined people.</p>
+<p>Like anything world changing, this solution must follow some predefined <em>Commandments</em>:</p>
+<ol style="list-style-type: decimal">
+<li>Most important: should be very easy to use after setting it up.
+<ul>
+<li>Nobody likes if things take extra time, and if one has to debug it, breaking the working flow of your brilliant mind.</li>
+</ul></li>
+<li>It should be low on resources.
+<ul>
+<li>Lets face it, we could all do with a bit less of junk messing up out registries and hogging up our precious system resources.</li>
+</ul></li>
+<li>A shortcut to call up a note taking app/device/software/editor.</li>
+<li>The formatting should be pre-fabricated, so that I don’t have to do anything but just jot down my precious thought/brilliant idea.</li>
+<li>Saving the note should back it up and make it immediately available to me anytime and anyplace.
+<ul>
+<li>So also have syncing capabilities. After all, whats the point in having a million dollar idea inside a malfunctioning hard disk drive.</li>
+</ul></li>
+</ol>
+<p>As you are short of time, you will have to contend with only five commandments for now !</p>
+</div>
+<div id="execution" class="section level1">
+<h1>Execution</h1>
+<p>Lets solve this step by step.</p>
+<div id="pre-requisites" class="section level2">
+<h2>Pre-requisites</h2>
+<ul>
+<li>A linux operating system.
+<ul>
+<li>I am sure there is a way to implement it on other operating systems as well, but I did not explore it. But, if you want to give it a try I am sure it is possible without much hassle.</li>
+</ul></li>
+<li>Vim - its an editor.
+<ul>
+<li>This text editor has cool features and a lot of customization. Read more about it <a href="https://www.vim.org/">here</a>.</li>
+</ul></li>
+<li>Pandoc.
+<ul>
+<li>Its a universal document converter. Its also known by its creators as a swiss-army knife. Read more about it <a href="https://pandoc.org/">here</a>.</li>
+</ul></li>
+<li>git on local system - also github/gitlab or your favorite online git repository space (I will use github here).
+<ul>
+<li>If you are not really into open source distributed version control, I highly recommend reading and learning about it <a href="https://git-scm.com/">here</a>.</li>
+</ul></li>
+<li>zathura. Or your favorite pdf viewer, but I will only talk about this one.
+<ul>
+<li>Its a minimalist yet powerful pdf viewer. You can learn more about it <a href="https://pwmt.org/projects/zathura/">here</a>.</li>
+</ul></li>
+</ul>
+</div>
+<div id="steps" class="section level2">
+<h2>Steps</h2>
+<div id="step-1---always-work-with-an-up-to-date-system" class="section level3">
+<h3>Step 1 - Always work with an up to date system</h3>
+<p>Please don’t be the person whose system is malfunctioning or worse yet been hacked into because you couldn’t be bothered to update your system. I will make it easy for you and give you the commands on a Debian based system. Yes, this includes your favorite - Ubuntu.</p>
+<p>Please understand that for these commands you will need admin/root rights on your system.</p>
+<p>The default installation repository is Advanced Packaging Tool (APT) that comes with the system. The ‘-y’ already accepts the defaults as yes. And, ‘sudo’ command elevates the user to admin/root.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">sudo</span> apt -y update   # updates the repositories</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="fu">sudo</span> apt -y upgrade  # implements the updates</span></code></pre></div>
+</div>
+<div id="step-2---install-the-required-software-and-packages" class="section level3">
+<h3>Step 2 - Install the required software and packages</h3>
+<p>I am assuming you have the defaults installed on your system. In case not, run the following commands to be sure.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">sudo</span> apt install -y ssh xargs <span class="co"># install ssh to communicate with github and xargs to run commands from standard input</span></span></code></pre></div>
+<div id="vim" class="section level4">
+<h4>Vim</h4>
+<p>To install vim the easiest way is through the APT repository. It can however also be installed through other means like github, after which you will have to compile it. However, I will show here the easiest way.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">sudo</span> apt install -y vim      # install vim</span></code></pre></div>
+<p>Interesting thing to note is the location of the configuration file. Its usually in the home folder and is named - <em>.vimrc</em>. We will edit this file for our purpose.</p>
+<p>Once at the location of the file (usually home folder), open it with the admin/root rights with the following command.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">sudo</span> vim .vimrc      # Open the vim configuration file</span></code></pre></div>
+<p>The configuration file opens, go to to the bottom of the file and press <em>i</em>. This will put vim editor in insert mode. Press <em>enter</em> to get into a new line and write the following command.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="ex">autocmd</span> BufWritePost *note-*.md silent !sk_buildNote %:p</span></code></pre></div>
+<p>Then press <em>ESC</em> to enter normal mode. In this write <em>:wq</em> and press enter to exit the editor. Here ‘:’ signifies a command, ‘w’ signifies write and ‘q’ signifies quit.</p>
+<p>The command we entered basically tells the vim editor that whenever we save a file that has the file name starting with ‘note-’, then run the script ‘sk_buildNote’ silently. We will see below what are the contents of this script.</p>
+</div>
+<div id="pandoc" class="section level4">
+<h4>Pandoc</h4>
+<p>There are a number of ways to install pandoc as well, but as before with vim the easiest way is through the APT. Enter the following command to install it.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="fu">sudo</span> apt install -y pandoc     # install pandoc</span></code></pre></div>
+</div>
+<div id="latex" class="section level4">
+<h4>Latex</h4>
+<p>We also need to make sure that we install latex because we want our note to be also a beautiful looking pdf document. To install Latex, enter the following command. Note - this will install the entire thing and will take time going through the important associated packages. I highly recommend you install the entire thing because latex can be a hassle if you have to worry about its individual packages.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="fu">sudo</span> apt install -y texlive         # install latex to produce pdf</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a><span class="fu">sudo</span> apt install -y texlive-xetex   # install latex engine xelatex in case it was not part of texlive</span></code></pre></div>
+</div>
+<div id="git" class="section level4">
+<h4>Git</h4>
+<p>Installing git is straight forward with the following command.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="fu">sudo</span> apt install -y git      # install git</span></code></pre></div>
+<p>After installation, we have to configure git for usage. To set it up enter the following commands.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="fu">git</span> config --global user.name <span class="st">&quot;Your Name&quot;</span>         # Your name</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a><span class="fu">git</span> config --global user.email <span class="st">&quot;your@email.com&quot;</span>   # Use your github no reply email for privacy. Need a github account for this.</span></code></pre></div>
+<p>Now your git should be set up. Please make sure to get ssh key pair setup for better security. Also from August 2021 github is not going to allow any https connections. You can learn more about it <a href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh">here</a>.</p>
+<p>Assuming all is working, Create an online repository on Github. I will call mine as <em>notes_taking</em>. To clone it through ssh enter the following command (I also have an example in comments on how to clone without ssh). You will have to enter the passphrase for the ssh connection or the password for the https connection.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="co"># with ssh </span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a><span class="fu">git</span> clone git@github.com:<span class="op">&lt;</span>your-github-user-name<span class="op">&gt;</span>/notes_taking.git</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a><span class="co">#</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a><span class="co"># For without ssh, with https connection (soon to be obsolete)</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a><span class="co"># git clone https://github.com/&lt;your-github-user-name&gt;/notes_taking.git</span></span></code></pre></div>
+<p>Now we have a notes_taking folder with all the contents of the repository. you can confirm this by typing <em>ls</em> to check the existence of the folder. Now enter the folder and create two sub-folders. These folders will contain the relevant markdown and pdf files.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="co"># enter the repository folder</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a><span class="bu">cd</span> notes_private</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a><span class="co"># Create the two sub-folders</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a><span class="fu">mkdir</span> md_files pdf</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a><span class="co"># go back to the home folder</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a><span class="bu">cd</span> ~</span></code></pre></div>
+</div>
+<div id="zathura" class="section level4">
+<h4>Zathura</h4>
+<p>Installing Zathura is straight forward with the following command.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="fu">sudo</span> apt install -y zathura  # install zathura</span></code></pre></div>
+</div>
+</div>
+<div id="step-3---creating-bash-scripts" class="section level3">
+<h3>Step 3 - Creating bash scripts</h3>
+<p>In total we will create four different bash files that will have executable status.</p>
+<div id="script-1" class="section level4">
+<h4>Script 1</h4>
+<p>Lets create the first one called <em>sk_ssh-add-pass</em>. This script will in general be a way to access the online github repository without the need to manually enter the passphrase. I will be using the ssh key pair to accomplish this. Do the following.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="co"># make sure you are in the home folder</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a><span class="bu">cd</span> ~</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a><span class="co"># create a file using editor of your choice, I will use vim</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a><span class="ex">vim</span> sk_ssh-add-pass</span></code></pre></div>
+<p>Once inside press <em>i</em> to start editing the file. Write the following</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a><span class="co"># usage</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a><span class="kw">if</span><span class="bu"> [</span> <span class="va">$#</span> <span class="ot">-ne</span> 2<span class="bu"> ]</span> ; <span class="kw">then</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true"></a>        <span class="bu">echo</span> <span class="st">&quot;Usage: sk_ssh-add-pass keyfile passfile&quot;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true"></a>        <span class="bu">exit</span> 1</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true"></a><span class="kw">fi</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true"></a><span class="co"># call the agent and give it the passphrase</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true"></a><span class="va">pass=$(</span><span class="bu">echo</span> <span class="va">$2)</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true"></a><span class="ex">expect</span> <span class="op">&lt;&lt; EOF</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true"></a>    spawn ssh-add <span class="va">$1</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true"></a>    expect &quot;Enter passphrase&quot;</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true"></a>    send &quot;<span class="va">$pass</span>\r&quot;</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true"></a>    expect eof</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true"></a><span class="op">EOF</span></span></code></pre></div>
+<p>Save the file by pressing <em>ESC</em> and then typing <em>:wq</em> and then press <em>enter</em>.</p>
+</div>
+<div id="script-2" class="section level4">
+<h4>Script 2</h4>
+<p>Follow the same procedure as script 1 above but instead call this one <em>sk_notetaker</em>, and enter the text inside as below.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a><span class="co"># get the correct file (create it if not found)</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a><span class="va">noteFilename=</span><span class="st">&quot;&lt;repo-location&gt;/note-</span><span class="va">$(</span><span class="fu">date</span> +%Y-%m-%d<span class="va">)</span><span class="st">.md&quot;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true"></a><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="va">$noteFilename</span><span class="bu"> ]</span>; <span class="kw">then</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true"></a>        <span class="bu">echo</span> <span class="st">&quot;# Notes for </span><span class="va">$(</span><span class="fu">date</span> +%Y-%m-%d<span class="va">)</span><span class="st">&quot;</span> <span class="op">&gt;</span> <span class="va">$noteFilename</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true"></a><span class="kw">fi</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true"></a><span class="co"># Vim formatting</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true"></a><span class="ex">vim</span> -c <span class="st">&quot;norm Go&quot;</span> <span class="kw">\</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true"></a>        <span class="ex">-c</span> <span class="st">&quot;norm Go## </span><span class="va">$(</span><span class="fu">date</span> +%H:%M<span class="va">)</span><span class="st">&quot;</span> <span class="kw">\</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true"></a>        <span class="ex">-c</span> <span class="st">&quot;norm G2o&quot;</span> <span class="kw">\</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true"></a>        <span class="ex">-c</span> <span class="st">&quot;norm zz&quot;</span> <span class="kw">\</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true"></a>        <span class="ex">-c</span> <span class="st">&quot;startinsert&quot;</span> <span class="va">$noteFilename</span></span></code></pre></div>
+<p>Note: &lt;repo-location&gt; is your repository location which would typically be <em>/home/notes_taking</em>.</p>
+</div>
+<div id="script-3" class="section level4">
+<h4>Script 3</h4>
+<p>Follow the same procedure as script 1 above but instead call this one <em>sk_buildNote</em>, and enter the text inside as below.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true"></a><span class="co"># location variables</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true"></a><span class="va">filename=$1</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true"></a><span class="va">target=</span><span class="st">&quot;</span><span class="va">$(</span><span class="fu">dirname</span> <span class="st">&quot;</span><span class="va">${filename}</span><span class="st">&quot;</span><span class="va">)</span><span class="st">/../pdf&quot;</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true"></a><span class="va">location_now=</span><span class="st">&quot;</span><span class="va">$(</span><span class="fu">dirname</span> <span class="st">&quot;</span><span class="va">${filename}</span><span class="st">&quot;</span><span class="va">)</span><span class="st">/../&quot;</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true"></a><span class="va">outputFile=</span><span class="st">&quot;</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">&quot;</span><span class="va">$filename</span><span class="st">&quot;</span> .md<span class="va">)</span><span class="st">.pdf&quot;</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true"></a><span class="co"># make pdf folder if non existent</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true"></a><span class="fu">mkdir</span> -p <span class="va">$target</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true"></a><span class="co"># convert into pdf</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true"></a><span class="ex">pandoc</span> <span class="kw">\</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true"></a>    <span class="ex">--pdf-engine</span>=xelatex <span class="kw">\</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true"></a>    <span class="ex">-o</span> <span class="st">&quot;</span><span class="va">$target</span><span class="st">/</span><span class="va">$outputFile</span><span class="st">&quot;</span> <span class="va">$filename</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true"></a></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true"></a><span class="co"># delete any saved swp files created by vim</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true"></a><span class="fu">rm</span> <span class="va">$location_now</span>/md_files/.note*.*</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true"></a></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true"></a><span class="co"># getting access to github via ssh agent</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true"></a><span class="bu">eval</span> <span class="st">&quot;</span><span class="va">$(</span><span class="fu">ssh-agent</span> -s<span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true"></a><span class="ex">sk_ssh-add-pass</span> ~/.ssh/<span class="op">&lt;</span>private-id-name<span class="op">&gt;</span> <span class="op">&lt;</span>passphrase<span class="op">&gt;</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true"></a></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true"></a><span class="co"># commit changes to github and push it out</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true"></a><span class="fu">git</span> -C <span class="va">$location_now</span>/ add .</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true"></a><span class="fu">git</span> -C <span class="va">$location_now</span>/ commit -m <span class="st">&#39;note added&#39;</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true"></a><span class="fu">git</span> -C <span class="va">$location_now</span>/ push origin main</span></code></pre></div>
+<p>Note: &lt;private-id-name&gt; is ssh private key name that you use to connect to github. &lt;passphrase&gt; is your passphrase for the key.</p>
+</div>
+<div id="script-4" class="section level4">
+<h4>Script 4</h4>
+<p>Follow the same procedure as script 1 above but instead call this one <em>sk_mostRecentNote</em>, and enter the text inside as below.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true"></a><span class="co"># call the latest note pdf file to view</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true"></a><span class="fu">ls</span> -r <span class="op">&lt;</span>repo-location<span class="op">&gt;</span>/pdf/*.pdf <span class="kw">|</span> <span class="fu">head</span> -n1 <span class="kw">|</span> <span class="fu">xargs</span> zathura</span></code></pre></div>
+<p>Note: ‘&lt;repo-location&gt;’ is your repository location which would typically be <em>/home/notes_taking</em>.</p>
+</div>
+</div>
+<div id="step-4---giving-bash-access" class="section level3">
+<h3>Step 4 - Giving bash access</h3>
+<p>We have all the files ready. Let’s give all the four files (four bash scripts created in the previous section) executable access and move them to the local binary location (path to the environment variables) by typing the following commands.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a><span class="fu">sudo</span> chmod +x sk_ssh-add-pass sk_notetaker sk_buildNote sk_mostRecentNote</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a><span class="fu">sudo</span> mv sk_ssh-add-pass sk_notetaker sk_buildNote sk_mostRecentNote <span class="op">&lt;</span>local-bin-directory<span class="op">&gt;</span></span></code></pre></div>
+<p>Note: ‘&lt;local-bin-directory&gt;’ is the local binary directory of your system. Typically on a debian system it is <em>/usr/local/bin/</em>.</p>
+</div>
+<div id="step-4---final-hammer" class="section level3">
+<h3>Step 4 - Final Hammer</h3>
+<p>The final step is to map a keyboard shortcut to the <em>notetaker</em> bash script. There are number of ways to do this including my favorite <a href="https://dwm.suckless.org/">dwm</a>. But, for the sake of convenience and accessibility to all, I will tell you how to do it on an Ubuntu system.</p>
+<p>Go to the settings in Ubuntu and under Devices click on Keyboard. Here you will find all the default system shortcuts, go to the end and add custom shortcut. Give it a name you like (something like - notetaker), and in command add the bash script name <em>sk_notetaker</em> (alternative you can give it the full path, typically <em>/usr/local/bin/sk_notetaker</em>). Finally, add the shortcut of your choice. My preference is <em>super + n</em>.</p>
+<p>Now, add another custom shortcut, call it something like <em>noteviewer</em>. In the command section give the bash script name <em>sk_mostRecentNote</em> (alternatively the full path), and add another keyboard shortcut. My preference if <em>super + shift + n</em>.</p>
+<p>ENJOY!</p>
+</div>
+</div>
+</div>
 </div>
 
    

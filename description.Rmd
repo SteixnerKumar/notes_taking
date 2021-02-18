@@ -9,7 +9,7 @@ fontsize: 12pt
 output:
   rmdformats::readthedown:
     self_contained: true
-    toc_depth: 2
+    toc_depth: 4
     thumbnails: true
     lightbox: true
     gallery: true
@@ -48,19 +48,270 @@ header-includes:
 ---
 
 
+# Problem
+Have you come across a thought or an world changing idea while working on a project or guilty reading whilst procrastinating on work, and frustratingly broken the smooth flow to write it down. Or, even worse, let it slide by and later regret because your highly evolved fast functioning brain cannot be bothered to remember such details.\newline
 
+Well, I have, and as today is your lucky day, I am giving you an insight into how to get around it. If you practice patience and diligence, don't worry, this should be a fun read and a cool small project.
 
+# Solution
+A solution for everyone or every scenario is probably stretching it a bit, but it certainly is for me and similarly inclined people.\newline 
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+Like anything world changing, this solution must follow some predefined *Commandments*:\newline
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+1. Most important: should be very easy to use after setting it up.
+    + Nobody likes if things take extra time, and if one has to debug it, breaking the working flow of your brilliant mind.
+2. It should be low on resources.
+    + Lets face it, we could all do with a bit less of junk messing up out registries and hogging up our precious system resources.
+3. A shortcut to call up a note taking app/device/software/editor.
+4. The formatting should be pre-fabricated, so that I don't have to do anything but just jot down my precious thought/brilliant idea.
+5. Saving the note should back it up and make it immediately available to me anytime and anyplace.
+    + So also have syncing capabilities. After all, whats the point in having a million dollar idea inside a malfunctioning hard disk drive.
 
-```{r}
-plot(cars)
+As you are short of time, you will have to contend with only five commandments for now !
+
+# Execution
+Lets solve this step by step.
+
+## Pre-requisites
+* A linux operating system. 
+  + I am sure there is a way to implement it on other operating systems as well, but I did not explore it. But, if you want to give it a try I am sure it is possible without much hassle.
+* Vim - its an editor.
+  + This text editor has cool features and a lot of customization. Read more about it [here](https://www.vim.org/).
+* Pandoc.
+  + Its a universal document converter. Its also known by its creators as a swiss-army knife. Read more about it [here](https://pandoc.org/).
+* git on local system - also github/gitlab or your favorite online git repository space (I will use github here).
+  + If you are not really into open source distributed version control, I highly recommend reading and learning about it [here](https://git-scm.com/).
+* zathura. Or your favorite pdf viewer, but I will only talk about this one.
+  + Its a minimalist yet powerful pdf viewer. You can learn more about it [here](https://pwmt.org/projects/zathura/).
+
+## Steps
+
+### Step 1 - Always work with an up to date system
+Please don't be the person whose system is malfunctioning or worse yet been hacked into because you couldn't be bothered to update your system. I will make it easy for you and give you the commands on a Debian based system. Yes, this includes your favorite - Ubuntu.\newline
+
+Please understand that for these commands you will need admin/root rights on your system.\newline
+
+The default installation repository is Advanced Packaging Tool (APT) that comes with the system. The '-y' already accepts the defaults as yes. And, 'sudo' command elevates the user to admin/root.
+
+```{bash step_1, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+sudo apt -y update   # updates the repositories
+sudo apt -y upgrade  # implements the updates
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+### Step 2 - Install the required software and packages 
+I am assuming you have the defaults installed on your system. In case not, run the following commands to be sure.
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+```{bash step_2_install_defaults, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+sudo apt install -y ssh xargs # install ssh to communicate with github and xargs to run commands from standard input
+```
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+#### Vim
+To install vim the easiest way is through the APT repository. It can however also be installed through other means like github, after which you will have to compile it. However, I will show here the easiest way.
+
+```{bash step_2_install_vim, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+sudo apt install -y vim      # install vim
+```
+
+Interesting thing to note is the location of the configuration file. Its usually in the home folder and is named - *.vimrc*. We will edit this file for our purpose.\newline
+
+Once at the location of the file (usually home folder), open it with the admin/root rights with the following command.
+
+```{bash step_2_config_vim_1, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+sudo vim .vimrc      # Open the vim configuration file
+```
+
+The configuration file opens, go to to the bottom of the file and press *i*. This will put vim editor in insert mode. Press *enter* to get into a new line and write the following command.
+
+```{bash step_2_config_vim_2, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+autocmd BufWritePost *note-*.md silent !sk_buildNote %:p
+```
+
+Then press *ESC* to enter normal mode. In this write *:wq* and press enter to exit the editor. Here ':' signifies a command, 'w' signifies write and 'q' signifies quit.\newline
+
+The command we entered basically tells the vim editor that whenever we save a file that has the file name starting with 'note-', then run the script 'sk_buildNote' silently. We will see below what are the contents of this script.
+
+#### Pandoc
+There are a number of ways to install pandoc as well, but as before with vim the easiest way is through the APT. Enter the following command to install it.
+
+```{bash step_2_install_pandoc, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+sudo apt install -y pandoc     # install pandoc
+```
+
+#### Latex
+We also need to make sure that we install latex because we want our note to be also a beautiful looking pdf document. To install Latex, enter the following command. Note - this will install the entire thing and will take time going through the important associated packages. I highly recommend you install the entire thing because latex can be a hassle if you have to worry about its individual packages.
+
+```{bash step_2_install_latex, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+sudo apt install -y texlive         # install latex to produce pdf
+sudo apt install -y texlive-xetex   # install latex engine xelatex in case it was not part of texlive
+```
+
+#### Git
+Installing git is straight forward with the following command.
+
+```{bash step_2_install_git, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+sudo apt install -y git      # install git
+```
+
+After installation, we have to configure git for usage. To set it up enter the following commands.
+
+```{bash step_2_config_git_1, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+git config --global user.name "Your Name"         # Your name
+git config --global user.email "your@email.com"   # Use your github no reply email for privacy. Need a github account for this.
+```
+
+Now your git should be set up. Please make sure to get ssh key pair setup for better security. Also from August 2021 github is not going to allow any https connections. You can learn more about it [here](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).\newline
+
+Assuming all is working, Create an online repository on Github. I will call mine as *notes_taking*. To clone it through ssh enter the following command (I also have an example in comments on how to clone without ssh). You will have to enter the passphrase for the ssh connection or the password for the https connection.
+
+```{bash step_2_config_git_2, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+# with ssh 
+git clone git@github.com:<your-github-user-name>/notes_taking.git
+#
+# For without ssh, with https connection (soon to be obsolete)
+# git clone https://github.com/<your-github-user-name>/notes_taking.git
+```
+
+Now we have a notes_taking folder with all the contents of the repository. you can confirm this by typing *ls* to check the existence of the folder. Now enter the folder and create two sub-folders. These folders will contain the relevant markdown and pdf files.
+
+```{bash step_2_config_git_3, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+# enter the repository folder
+cd notes_private
+# Create the two sub-folders
+mkdir md_files pdf
+# go back to the home folder
+cd ~
+```
+
+#### Zathura
+Installing Zathura is straight forward with the following command.
+
+```{bash step_2_install_zathura, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+sudo apt install -y zathura  # install zathura
+```
+
+### Step 3 - Creating bash scripts
+In total we will create four different bash files that will have executable status.\newline
+
+#### Script 1
+Lets create the first one called *sk_ssh-add-pass*. This script will in general be a way to access the online github repository without the need to manually enter the passphrase. I will be using the ssh key pair to accomplish this. Do the following.
+
+```{bash step_3_bscript_ssh_add_pass_pre, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+# make sure you are in the home folder
+cd ~
+# create a file using editor of your choice, I will use vim
+vim sk_ssh-add-pass
+```
+
+Once inside press *i* to start editing the file. Write the following
+
+```{bash step_3_bscript_ssh_add_pass, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+#!/bin/bash
+
+# usage
+if [ $# -ne 2 ] ; then
+        echo "Usage: sk_ssh-add-pass keyfile passfile"
+        exit 1
+fi
+
+# call the agent and give it the passphrase
+pass=$(echo $2)
+expect << EOF
+    spawn ssh-add $1
+    expect "Enter passphrase"
+    send "$pass\r"
+    expect eof
+EOF
+```
+
+Save the file by pressing *ESC* and then typing *:wq* and then press *enter*.
+
+#### Script 2
+Follow the same procedure as script 1 above but instead call this one *sk_notetaker*, and enter the text inside as below.
+
+```{bash step_3_bscript_notetaker, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+#!/bin/bash
+
+# get the correct file (create it if not found)
+noteFilename="<repo-location>/note-$(date +%Y-%m-%d).md"
+if [ ! -f $noteFilename ]; then
+        echo "# Notes for $(date +%Y-%m-%d)" > $noteFilename
+fi
+
+# Vim formatting
+vim -c "norm Go" \
+        -c "norm Go## $(date +%H:%M)" \
+        -c "norm G2o" \
+        -c "norm zz" \
+        -c "startinsert" $noteFilename
+```
+
+Note: \<repo-location\> is your repository location which would typically be */home/notes_taking*.
+
+#### Script 3
+Follow the same procedure as script 1 above but instead call this one *sk_buildNote*, and enter the text inside as below.
+
+```{bash step_3_bscript_buildNote, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+#!/bin/bash
+
+# location variables
+filename=$1
+target="$(dirname "${filename}")/../pdf"
+location_now="$(dirname "${filename}")/../"
+outputFile="$(basename "$filename" .md).pdf"
+
+# make pdf folder if non existent
+mkdir -p $target
+
+# convert into pdf
+pandoc \
+    --pdf-engine=xelatex \
+    -o "$target/$outputFile" $filename
+
+# delete any saved swp files created by vim
+rm $location_now/md_files/.note*.*
+
+# getting access to github via ssh agent
+eval "$(ssh-agent -s)"
+sk_ssh-add-pass ~/.ssh/<private-id-name> <passphrase>
+
+# commit changes to github and push it out
+git -C $location_now/ add .
+git -C $location_now/ commit -m 'note added'
+git -C $location_now/ push origin main
+```
+
+Note: \<private-id-name\> is ssh private key name that you use to connect to github. \<passphrase\> is your passphrase for the key.
+
+#### Script 4
+Follow the same procedure as script 1 above but instead call this one *sk_mostRecentNote*, and enter the text inside as below.
+
+```{bash step_3_bscript_mostRecentNote, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+#!/bin/bash
+
+# call the latest note pdf file to view
+ls -r <repo-location>/pdf/*.pdf | head -n1 | xargs zathura
+```
+
+Note: '\<repo-location\>' is your repository location which would typically be */home/notes_taking*.
+
+### Step 4 - Giving bash access
+We have all the files ready. Let's give all the four files (four bash scripts created in the previous section) executable access and move them to the local binary location (path to the environment variables) by typing the following commands.
+
+```{bash step_3_bscript_final, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+sudo chmod +x sk_ssh-add-pass sk_notetaker sk_buildNote sk_mostRecentNote
+sudo mv sk_ssh-add-pass sk_notetaker sk_buildNote sk_mostRecentNote <local-bin-directory>
+```
+
+Note: '\<local-bin-directory\>' is the local binary directory of your system. Typically on a debian system it is */usr/local/bin/*.
+
+### Step 4 - Final Hammer
+The final step is to map a keyboard shortcut to the *notetaker* bash script. There are number of ways to do this including my favorite [dwm](https://dwm.suckless.org/). But, for the sake of convenience and accessibility to all, I will tell you how to do it on an Ubuntu system.\newline
+
+Go to the settings in Ubuntu and under Devices click on Keyboard. Here you will find all the default system shortcuts, go to the end and add custom shortcut. Give it a name you like (something like - notetaker), and in command add the bash script name *sk_notetaker* (alternative you can give it the full path, typically */usr/local/bin/sk_notetaker*). Finally, add the shortcut of your choice. My preference is *super + n*.\newline
+
+Now, add another custom shortcut, call it something like *noteviewer*. In the command section give the bash script name *sk_mostRecentNote* (alternatively the full path), and add another keyboard shortcut. My preference if *super + shift + n*.\newline
+
+
+ENJOY!
+
